@@ -1,7 +1,7 @@
 // divide_by_two.rs
 // 二分法求解
 
-use crate::base::Stack;
+use crate::data::Stack;
 
 pub fn divide_by_two(mut dec_num: u32) -> String {
     let mut rem_stack = Stack::new();

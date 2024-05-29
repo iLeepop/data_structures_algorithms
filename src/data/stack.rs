@@ -1,4 +1,5 @@
 // stack.rs
+// 栈
 
 #[derive(Debug)]
 pub struct Stack<T> {

@@ -1,7 +1,7 @@
 // par_checker.rs
 // 括号检查
 
-use crate::base::Stack;
+use crate::data::Stack;
 
 fn par_match(open: char, close: char) -> bool {
     let opens = "([{";

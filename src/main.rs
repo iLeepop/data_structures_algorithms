@@ -1,7 +1,8 @@
-mod base;
+mod data;
 mod utils;
+mod way;
 
-use base::*;
+use data::*;
 use utils::*;
 
 fn main() {
