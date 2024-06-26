@@ -42,7 +42,7 @@ mod tests {
 
     #[test]
     fn test_interpolation_search() {
-        let nums = [1, 2, 3, 5, 6, 8, 9, 10];
+        let nums = [1, 2, 3, 5, 6, 7, 8, 9, 10, 14, 16];
         let target = 8;
         let is_found = interpolation_search(&nums, target);
         println!("{} is found: {}", target, is_found);
