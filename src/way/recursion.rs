@@ -143,6 +143,26 @@ fn print_cashes(cashes_used: &[u32], mut amount: u32) {
     }
 }
 
+fn fibnacci_rec(n: u32) -> u32 {
+    if n == 1 || n == 2 {
+        return 1;
+    } else {
+        fibnacci_rec(n - 1) + fibnacci_rec(n - 2)
+    }
+}
+
+fn fibnacci_dp(n: u32) -> u32 {
+    let mut dp = [1, 1];
+    for i in 2..=n {
+        let idx1 = (i % 2) as usize;
+        let idx2 = ((i - 1) % 2) as usize;
+        let idx3 = ((i - 2) % 2) as usize;
+        dp[idx1] = dp[idx2] + dp[idx3];
+    }
+
+    dp[(( n - 1) % 2) as usize]
+}
+
 #[cfg(test)]
 mod tests {
     use core::num;
@@ -204,5 +224,12 @@ mod tests {
         let cs_num = dp_rec_mc_show(&cashes, amount, &mut min_cashes, &mut cashes_used);
         println!("Refund for {amount} need {cs_num} cashes");
         print_cashes(&cashes_used, amount);
+    }
+
+    #[test]
+    fn test_fibnacci() {
+        let n = 10;
+        println!("fibnacci_rec({n}) = {}", fibnacci_rec(n));
+        println!("fibnacci_dp({n}) = {}", fibnacci_dp(n));
     }
 }
