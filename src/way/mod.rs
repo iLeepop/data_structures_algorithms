@@ -4,5 +4,6 @@ mod binary_search;
 mod interpolation_search;
 mod exponential_search;
 mod hash;
+mod quick_sort;
 
 pub use binary_search::*;
