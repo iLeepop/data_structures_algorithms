@@ -21,13 +21,17 @@ impl<T> Stack<T> {
     }
 
     pub fn pop(&mut self) -> Option<T> {
-        if self.top == 0 { return None; }
+        if self.top == 0 {
+            return None;
+        }
         self.top -= 1;
         self.data.pop()
     }
 
     pub fn peek(&self) -> Option<&T> {
-        if self.top == 0 { return None; }
+        if self.top == 0 {
+            return None;
+        }
         self.data.get(self.top - 1)
     }
 

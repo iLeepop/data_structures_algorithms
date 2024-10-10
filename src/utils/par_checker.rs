@@ -5,7 +5,7 @@ use crate::data::Stack;
 
 fn par_match(open: char, close: char) -> bool {
     let opens = "([{";
-    let closes =")]}";
+    let closes = ")]}";
     opens.find(open) == closes.find(close)
 }
 

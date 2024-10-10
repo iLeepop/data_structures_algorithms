@@ -2,7 +2,9 @@
 // 插值查找
 
 fn interpolation_search(nums: &[i32], target: i32) -> bool {
-    if nums.is_empty() { return false; }
+    if nums.is_empty() {
+        return false;
+    }
 
     let mut low = 0usize;
     let mut high = nums.len() - 1;
@@ -17,7 +19,7 @@ fn interpolation_search(nums: &[i32], target: i32) -> bool {
             break;
         }
 
-        let offset = (target - low_val)*(high - low) as i32 / (high_val - low_val);
+        let offset = (target - low_val) * (high - low) as i32 / (high_val - low_val);
         interpolant = low + offset as usize;
 
         if nums[interpolant] > target {
@@ -28,7 +30,7 @@ fn interpolation_search(nums: &[i32], target: i32) -> bool {
             break;
         }
     }
-    
+
     if target == nums[interpolant] {
         true
     } else {

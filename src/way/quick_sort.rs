@@ -26,7 +26,7 @@ fn quick_sort_rec(a: &mut Vec<i32>) -> usize {
 
     while l_flag || r_flag {
         if sert == a.len() - 1 {
-            break
+            break;
         }
         for i in (sert + 1)..a.len() {
             // println!("left:{:?}", i);
@@ -35,14 +35,14 @@ fn quick_sort_rec(a: &mut Vec<i32>) -> usize {
                 a.swap(i, sert);
                 sert = i;
                 l_flag = true;
-                break
+                break;
             } else {
                 // println!("left continue!");
                 l_flag = false;
             }
         }
         if sert == 0 {
-            break
+            break;
         }
         for i in 0..sert {
             // println!("right:{:?}", i);
@@ -51,14 +51,14 @@ fn quick_sort_rec(a: &mut Vec<i32>) -> usize {
                 a.swap(i, sert);
                 sert = i;
                 r_flag = true;
-                break
+                break;
             } else {
                 // println!("right continue!");
                 r_flag = false;
             }
         }
     }
-    
+
     sert
 }
 
@@ -76,9 +76,11 @@ fn maopao(a: &mut Vec<i32>) {
 mod test {
     use super::*;
     use rand::Rng;
-    fn  random_vec(len: usize, max: i32, min: i32) -> Vec<i32> {
+    fn random_vec(len: usize, max: i32, min: i32) -> Vec<i32> {
         let mut rng = rand::thread_rng();
-        let v =(0..len).map(|_| rng.gen_range(min..=max)).collect::<Vec<_>>();
+        let v = (0..len)
+            .map(|_| rng.gen_range(min..=max))
+            .collect::<Vec<_>>();
         // let mut v = Vec::with_capacity(len);
         // for _ in 0..len {
         //     v.push(rng.gen_range(min..max));
@@ -88,56 +90,20 @@ mod test {
 
     #[test]
     fn test_quick_sort() {
-        // let mut a_v = vec![  
-        //     -23, 45, -12, 78, 3, -99, 56, 21, -8, 43,   
-        //     0, 12, -54, 67, 34, -2, 99, -76, 4, 89,   
-        //     -34, 11, 7, -87, 52, 31, -6, 48, -9, 27,   
-        //     19, -5, 63, -14, 25, 8, -45, 74, 39, -29,   
-        //     16, 41, -79, 50, 22, -100, 65, 36, -4, 82,   
-        //     -31, 9, 72, -81, 49, 28, -17, 57, 40, -68,   
-        //     13, 85, -26, 61, 37, -51, 76, 24, -38, 91,   
-        //     -47, 18, 69, -84, 54, 32, -11, 68, 44, -73,   
-        //     20, 87, -56, 70, 35, -98, 64, 23, -33, 86,   
-        //     -42, 15, 75, -88, 53, 30, -21, 59, 42, -62  
-        // ];
         let mut v1 = random_vec(300, 1000, -1000);
         let start_time1 = std::time::Instant::now();
         let r = quick_sort(&mut v1);
         let duration1 = start_time1.elapsed();
         println!("快速排序结果:{:?},总耗时:{:?}", r, duration1);
 
-        // a_v = vec![  
-        //     -23, 45, -12, 78, 3, -99, 56, 21, -8, 43,   
-        //     0, 12, -54, 67, 34, -2, 99, -76, 4, 89,   
-        //     -34, 11, 7, -87, 52, 31, -6, 48, -9, 27,   
-        //     19, -5, 63, -14, 25, 8, -45, 74, 39, -29,   
-        //     16, 41, -79, 50, 22, -100, 65, 36, -4, 82,   
-        //     -31, 9, 72, -81, 49, 28, -17, 57, 40, -68,   
-        //     13, 85, -26, 61, 37, -51, 76, 24, -38, 91,   
-        //     -47, 18, 69, -84, 54, 32, -11, 68, 44, -73,   
-        //     20, 87, -56, 70, 35, -98, 64, 23, -33, 86,   
-        //     -42, 15, 75, -88, 53, 30, -21, 59, 42, -62  
-        // ];
         let mut v2 = random_vec(300, 1000, -1000);
         let start_time2 = std::time::Instant::now();
         v2.sort();
         let duration2 = start_time2.elapsed();
         println!("官方排序结果:{:?},总耗时:{:?}", v2, duration2);
 
-        // a_v = vec![  
-        //     -23, 45, -12, 78, 3, -99, 56, 21, -8, 43,   
-        //     0, 12, -54, 67, 34, -2, 99, -76, 4, 89,   
-        //     -34, 11, 7, -87, 52, 31, -6, 48, -9, 27,   
-        //     19, -5, 63, -14, 25, 8, -45, 74, 39, -29,   
-        //     16, 41, -79, 50, 22, -100, 65, 36, -4, 82,   
-        //     -31, 9, 72, -81, 49, 28, -17, 57, 40, -68,   
-        //     13, 85, -26, 61, 37, -51, 76, 24, -38, 91,   
-        //     -47, 18, 69, -84, 54, 32, -11, 68, 44, -73,   
-        //     20, 87, -56, 70, 35, -98, 64, 23, -33, 86,   
-        //     -42, 15, 75, -88, 53, 30, -21, 59, 42, -62  
-        // ];
         let mut v3 = random_vec(300, 1000, -1000);
-        let start_time3 =std::time::Instant::now();
+        let start_time3 = std::time::Instant::now();
         maopao(&mut v3);
         let duration3 = start_time3.elapsed();
         println!("冒泡排序结果:{:?},总耗时:{:?}", v3, duration3);
@@ -145,18 +111,7 @@ mod test {
 
     #[test]
     fn test_quick_sort_rec() {
-        let mut a_v = vec![  
-            -23, 45, -12, 78, 3, -99, 56, 21, -8, 43,   
-            0, 12, -54, 67, 34, -2, 99, -76, 4, 89,   
-            -34, 11, 7, -87, 52, 31, -6, 48, -9, 27,   
-            19, -5, 63, -14, 25, 8, -45, 74, 39, -29,   
-            16, 41, -79, 50, 22, -100, 65, 36, -4, 82,   
-            -31, 9, 72, -81, 49, 28, -17, 57, 40, -68,   
-            13, 85, -26, 61, 37, -51, 76, 24, -38, 91,   
-            -47, 18, 69, -84, 54, 32, -11, 68, 44, -73,   
-            20, 87, -56, 70, 35, -98, 64, 23, -33, 86,   
-            -42, 15, 75, -88, 53, 30, -21, 59, 42, -62  
-        ];
+        let mut a_v = random_vec(300, 1000, -1000);
         let start_time = std::time::Instant::now();
         a_v.sort();
         let duration = start_time.elapsed();
@@ -165,19 +120,8 @@ mod test {
 
     #[test]
     fn test_maopao() {
-        let mut a_v = vec![  
-            -23, 45, -12, 78, 3, -99, 56, 21, -8, 43,   
-            0, 12, -54, 67, 34, -2, 99, -76, 4, 89,   
-            -34, 11, 7, -87, 52, 31, -6, 48, -9, 27,   
-            19, -5, 63, -14, 25, 8, -45, 74, 39, -29,   
-            16, 41, -79, 50, 22, -100, 65, 36, -4, 82,   
-            -31, 9, 72, -81, 49, 28, -17, 57, 40, -68,   
-            13, 85, -26, 61, 37, -51, 76, 24, -38, 91,   
-            -47, 18, 69, -84, 54, 32, -11, 68, 44, -73,   
-            20, 87, -56, 70, 35, -98, 64, 23, -33, 86,   
-            -42, 15, 75, -88, 53, 30, -21, 59, 42, -62  
-        ];
-        let start_time =std::time::Instant::now();
+        let mut a_v = random_vec(300, 1000, -1000);
+        let start_time = std::time::Instant::now();
         maopao(&mut a_v);
         let duration = start_time.elapsed();
         println!("冒泡排序结果:{:?},总耗时:{:?}", a_v, duration);
@@ -203,13 +147,13 @@ mod test {
             for i in 0..=10 {
                 println!("{}", i);
                 if i == 5 {
-                    break
+                    break;
                 }
             }
         }
 
         fn sl1() {
-            let mut arr = vec![2,4,3];
+            let mut arr = vec![2, 4, 3];
             let s_arr = arr.split_at(0);
             println!("{:?}", s_arr)
         }

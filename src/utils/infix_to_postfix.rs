@@ -5,34 +5,37 @@ use std::collections::HashMap;
 use crate::{par_checker, Stack};
 
 pub fn infix_to_postfix(infix: &str) -> Option<String> {
-    if !par_checker(infix) { return None; }
+    if !par_checker(infix) {
+        return None;
+    }
 
     let mut prec = HashMap::new();
-    prec.insert("(", 1); prec.insert(")", 1);
-    prec.insert("+", 2); prec.insert("-", 2);
-    prec.insert("*", 3); prec.insert("/", 3);
+    prec.insert("(", 1);
+    prec.insert(")", 1);
+    prec.insert("+", 2);
+    prec.insert("-", 2);
+    prec.insert("*", 3);
+    prec.insert("/", 3);
 
     let mut op_stack = Stack::new();
     let mut postfix = Vec::new();
     for token in infix.split_whitespace() {
-        if ("A" <= token && token <= "Z") ||
-            ("0" <= token && token <= "9") {
-                postfix.push(token);
-            } else if "(" == token {
-                op_stack.push(token);
-            } else if ")" == token {
-                let mut top = op_stack.pop().unwrap();
-                while top != "(" {
-                    postfix.push(top);
-                    top = op_stack.pop().unwrap();
-                }
-            } else {
-                while (!op_stack.is_empty()) &&
-                        (prec[op_stack.peek().unwrap()] >= prec[token]) {
-                            postfix.push(op_stack.pop().unwrap());
-                        }
-                op_stack.push(token);
+        if ("A" <= token && token <= "Z") || ("0" <= token && token <= "9") {
+            postfix.push(token);
+        } else if "(" == token {
+            op_stack.push(token);
+        } else if ")" == token {
+            let mut top = op_stack.pop().unwrap();
+            while top != "(" {
+                postfix.push(top);
+                top = op_stack.pop().unwrap();
             }
+        } else {
+            while (!op_stack.is_empty()) && (prec[op_stack.peek().unwrap()] >= prec[token]) {
+                postfix.push(op_stack.pop().unwrap());
+            }
+            op_stack.push(token);
+        }
     }
     while !op_stack.is_empty() {
         postfix.push(op_stack.pop().unwrap());
@@ -47,11 +50,12 @@ pub fn infix_to_postfix(infix: &str) -> Option<String> {
 }
 
 pub fn postfix_eval(postfix: &str) -> Option<i32> {
-    if postfix.len() < 5 {return None;}
+    if postfix.len() < 5 {
+        return None;
+    }
     let mut op_stack = Stack::new();
     for token in postfix.split_whitespace() {
-        if ("A" <= token && token <= "Z") ||
-            ("0" <= token && token <= "9") {
+        if ("A" <= token && token <= "Z") || ("0" <= token && token <= "9") {
             op_stack.push(token.parse::<i32>().unwrap());
         } else {
             let op2 = op_stack.pop().unwrap();
@@ -67,7 +71,6 @@ pub fn postfix_eval(postfix: &str) -> Option<i32> {
     }
 
     Some(op_stack.pop().unwrap())
-
 }
 
 #[cfg(test)]

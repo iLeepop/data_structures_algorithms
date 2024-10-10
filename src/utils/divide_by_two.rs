@@ -22,8 +22,9 @@ pub fn divide_by_two(mut dec_num: u32) -> String {
 }
 
 pub fn base_convert(mut dec_num: u32, base: u32) -> String {
-    let digits = ['0', '1', '2', '3', '4', '5', '6', '7', 
-                                '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+    let digits = [
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+    ];
     let mut rem_stack = Stack::new();
 
     while dec_num > 0 {
@@ -59,5 +60,4 @@ mod tests {
         let hex_str = base_convert(17, 16);
         print!("16 is b{}\n", hex_str);
     }
-
 }

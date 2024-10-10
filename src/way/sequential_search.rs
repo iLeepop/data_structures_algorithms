@@ -32,7 +32,7 @@ fn sequetial_search_pos(nums: &[i32], num: i32) -> Option<usize> {
     }
 }
 
-fn ordered_sequential_search(nums: &[i32], num:i32) -> bool {
+fn ordered_sequential_search(nums: &[i32], num: i32) -> bool {
     let mut pos = 0;
     let mut found = false;
     let mut stop = false;
@@ -66,7 +66,7 @@ mod tests {
         let nums = [9, 5, 7, 4, 1, 6, 2, 8, 5];
         match sequetial_search_pos(&nums, num) {
             Some(pos) => println!("index of {num} is {pos}"),
-            None => println!("{num} not found")
+            None => println!("{num} not found"),
         }
     }
 

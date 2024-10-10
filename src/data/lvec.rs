@@ -25,7 +25,10 @@ pub struct LVec<T> {
 
 impl<T: Copy + Debug> LVec<T> {
     pub fn new() -> Self {
-        LVec { size: 0, head: None }
+        LVec {
+            size: 0,
+            head: None,
+        }
     }
 
     pub fn clear(&mut self) {
@@ -94,7 +97,9 @@ impl<T: Copy + Debug> LVec<T> {
     }
 
     pub fn remove(&mut self, index: usize) -> Option<T> {
-        if index >= self.size { return None; }
+        if index >= self.size {
+            return None;
+        }
 
         let mut node;
         if 0 == index {
@@ -129,8 +134,10 @@ mod tests {
     #[test]
     fn test_lvec() {
         let mut lvec = LVec::new();
-        lvec.push(10); lvec.push(11);
-        lvec.push(12); lvec.push(13);
+        lvec.push(10);
+        lvec.push(11);
+        lvec.push(12);
+        lvec.push(13);
         lvec.insert(0, 9);
 
         let mut lvec2 = LVec::new();

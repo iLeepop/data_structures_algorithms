@@ -7,7 +7,7 @@ fn hash1(astr: &str, size: usize) -> usize {
 }
 
 #[derive(Debug, Clone, PartialEq)]
-struct HashMap <T> {
+struct HashMap<T> {
     size: usize,
     slot: Vec<usize>,
     data: Vec<T>,
@@ -33,18 +33,20 @@ impl<T: Clone + PartialEq + Default> HashMap<T> {
     }
 
     fn insert(&mut self, key: usize, value: T) {
-        if  0 == key { panic!("Error: key must > 0"); }
+        if 0 == key {
+            panic!("Error: key must > 0");
+        }
         let pos = self.hash(key);
         if 0 == self.slot[pos] {
             self.slot[pos] = key;
             self.data[pos] = value;
         } else {
-            let  mut next = self.rehash(pos);
+            let mut next = self.rehash(pos);
             while 0 != self.slot[next] && key != self.slot[next] {
                 next = self.rehash(next);
                 if next == pos {
                     println!("Error: slot is full, quit insertion");
-                    return
+                    return;
                 }
             }
 
@@ -58,7 +60,9 @@ impl<T: Clone + PartialEq + Default> HashMap<T> {
     }
 
     fn remove(&mut self, key: usize) -> Option<T> {
-        if 0 == key { panic!("Error: key must > 0"); }
+        if 0 == key {
+            panic!("Error: key must > 0");
+        }
 
         let pos = self.hash(key);
         if 0 == self.slot[pos] {
@@ -70,7 +74,8 @@ impl<T: Clone + PartialEq + Default> HashMap<T> {
             data
         } else {
             let mut data = None;
-            let mut stop = false; let mut found = false;
+            let mut stop = false;
+            let mut found = false;
             let mut curr = pos;
 
             while 0 != self.slot[curr] && !found && !stop {
@@ -91,7 +96,9 @@ impl<T: Clone + PartialEq + Default> HashMap<T> {
     }
 
     fn get(&self, key: usize) -> Option<&T> {
-        if 0 ==  key { panic!("Error: key must > 0"); }
+        if 0 == key {
+            panic!("Error: key must > 0");
+        }
 
         let pos = self.hash(key);
         let mut data = None;
@@ -114,7 +121,9 @@ impl<T: Clone + PartialEq + Default> HashMap<T> {
     }
 
     fn contains(&self, key: usize) -> bool {
-        if 0 == key { panic!("Error: key must > 0"); }
+        if 0 == key {
+            panic!("Error: key must > 0");
+        }
         self.slot.contains(&key)
     }
 
@@ -136,7 +145,8 @@ mod test {
     #[test]
     fn test_hash1() {
         let size = 11;
-        let s1 = "rust"; let s2 = "Rust";
+        let s1 = "rust";
+        let s2 = "Rust";
         let p1 = hash1(s1, size);
         let p2 = hash1(s2, size);
         println!("{} {}", p1, p2);
