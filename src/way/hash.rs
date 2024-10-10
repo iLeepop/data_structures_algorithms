@@ -6,6 +6,17 @@ fn hash1(astr: &str, size: usize) -> usize {
     sum % size
 }
 
+#[derive(Debug, Clone, PartialEq)]
+struct HashMap <T> {
+    size: usize,
+    slot: Vec<usize>,
+    data: Vec<T>,
+}
+
+impl<T: Clone + PartialEq + Default> HashMap<T> {
+    
+}
+
 #[cfg(test)]
 mod test {
     use super::*;

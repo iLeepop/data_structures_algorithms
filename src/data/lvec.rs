@@ -139,6 +139,9 @@ mod tests {
         println!("lvec2 len: {}", lvec2.len());
         lvec2.print_lvec();
 
+        let r = lvec.pop();
+        println!("lvec pop: {:?}", r);
+
         let res1 = lvec2.pop();
         let res2 = lvec2.remove(0);
         println!("pop {:#?}", res1.unwrap());
