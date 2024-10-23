@@ -74,6 +74,8 @@ fn maopao(a: &mut Vec<i32>) {
 
 #[cfg(test)]
 mod test {
+    use crate::{bubble_sort3, quick_sort as qs};
+
     use super::*;
     use rand::Rng;
     fn random_vec(len: usize, max: i32, min: i32) -> Vec<i32> {
@@ -90,23 +92,31 @@ mod test {
 
     #[test]
     fn test_quick_sort() {
-        let mut v1 = random_vec(300, 1000, -1000);
+        let len = 3000; let min = -1000; let max = 1000;
+        let mut v1 = random_vec(len, max, min);
         let start_time1 = std::time::Instant::now();
-        let r = quick_sort(&mut v1);
+        let _r = quick_sort(&mut v1);
         let duration1 = start_time1.elapsed();
-        println!("快速排序结果:{:?},总耗时:{:?}", r, duration1);
+        println!("快速排序结果:,总耗时:{:?}", duration1);
 
-        let mut v2 = random_vec(300, 1000, -1000);
+        let mut v4 = random_vec(len, max, min);
+        let start_time4 = std::time::Instant::now();
+        let  len = v4.len();
+        qs(&mut v4, 0, len - 1);
+        let duration4 = start_time4.elapsed();
+        println!("new快速排序递归结果:{:?},总耗时:{:?}", _r, duration4);
+
+        let mut v2 = random_vec(len, max, min);
         let start_time2 = std::time::Instant::now();
         v2.sort();
         let duration2 = start_time2.elapsed();
-        println!("官方排序结果:{:?},总耗时:{:?}", v2, duration2);
+        println!("官方排序结果:,总耗时:{:?}", duration2);
 
-        let mut v3 = random_vec(300, 1000, -1000);
+        let mut v3 = random_vec(len, max, min);
         let start_time3 = std::time::Instant::now();
-        maopao(&mut v3);
+        bubble_sort3(&mut v3);
         let duration3 = start_time3.elapsed();
-        println!("冒泡排序结果:{:?},总耗时:{:?}", v3, duration3);
+        println!("冒泡排序结果:,总耗时:{:?}", duration3);
     }
 
     #[test]
