@@ -97,14 +97,14 @@ mod test {
         let start_time1 = std::time::Instant::now();
         let _r = quick_sort(&mut v1);
         let duration1 = start_time1.elapsed();
-        println!("快速排序结果:,总耗时:{:?}", duration1);
+        println!("快速排序结果:{:?},总耗时:{:?}", _r, duration1);
 
         let mut v4 = random_vec(len, max, min);
         let start_time4 = std::time::Instant::now();
         let  len = v4.len();
         qs(&mut v4, 0, len - 1);
         let duration4 = start_time4.elapsed();
-        println!("new快速排序递归结果:{:?},总耗时:{:?}", _r, duration4);
+        println!("new快速排序递归结果:{:?},总耗时:{:?}", v4, duration4);
 
         let mut v2 = random_vec(len, max, min);
         let start_time2 = std::time::Instant::now();

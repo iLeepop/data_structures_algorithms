@@ -33,3 +33,19 @@ pub fn partition(nums: &mut [i32], low: usize, high: usize) -> usize {
 
     rm
 }
+
+
+#[cfg(test)]
+mod test {
+    use crate::random_vec;
+
+    use super::*;
+
+    #[test]
+    fn test_quick_sort() {
+        let mut v = random_vec(3000, 1000, -1000);
+        let len = v.len();
+        quick_sort(&mut v, 0, len - 1);
+        println!("{:?}", v);
+    }
+}
