@@ -9,7 +9,7 @@ fn quick_sort(a: &mut Vec<i32>) -> Vec<i32> {
         return a.to_vec();
     }
     let sert = quick_sort_rec(a);
-    let (r, l) = a.split_at(sert + 1);
+    let (r, l) = a.split_at(a.len() >> 1);
     // println!("{:?}, {:?}", r, l);
     let rr = quick_sort(&mut r.to_vec());
     let ll = quick_sort(&mut l.to_vec());
@@ -94,19 +94,19 @@ mod test {
         let start_time1 = std::time::Instant::now();
         let r = quick_sort(&mut v1);
         let duration1 = start_time1.elapsed();
-        println!("快速排序结果:{:?},总耗时:{:?}", r, duration1);
+        println!("快速排序结果:,总耗时:{:?}", duration1);
 
         let mut v2 = random_vec(300, 1000, -1000);
         let start_time2 = std::time::Instant::now();
         v2.sort();
         let duration2 = start_time2.elapsed();
-        println!("官方排序结果:{:?},总耗时:{:?}", v2, duration2);
+        println!("官方排序结果:,总耗时:{:?}", duration2);
 
         let mut v3 = random_vec(300, 1000, -1000);
         let start_time3 = std::time::Instant::now();
         maopao(&mut v3);
         let duration3 = start_time3.elapsed();
-        println!("冒泡排序结果:{:?},总耗时:{:?}", v3, duration3);
+        println!("冒泡排序结果:,总耗时:{:?}", duration3);
     }
 
     #[test]
