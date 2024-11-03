@@ -5,6 +5,7 @@ mod cantbelieveitcan_sort;
 mod quick_sort;
 mod insertion_sort;
 mod bin_insertion_sort;
+mod shell_sort;
 
 pub use bubble_sort::*;
 pub use quick_sort::*;
