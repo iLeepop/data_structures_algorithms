@@ -1,65 +1,37 @@
-fn quick_sort(a: &mut Vec<i32>) -> Vec<i32> {
-    if a.len() <= 1 {
-        // println!("{:?}", a);
-        return a.to_vec();
-    } else if a.len() == 2 {
-        if a[0] > a[1] {
-            a.swap(0, 1);
+use core::num;
+
+fn quick_sort(a: &mut [i32], low: usize, high: usize) {
+    if low < high {
+        let split = quick_sort_rec(a, low, high);
+        if split > 1 {
+            quick_sort(a, low, split - 1);
         }
-        return a.to_vec();
+        quick_sort(a, split + 1, high);
     }
-    let sert = quick_sort_rec(a);
-    let (r, l) = a.split_at(a.len() >> 1);
-    // println!("{:?}, {:?}", r, l);
-    let rr = quick_sort(&mut r.to_vec());
-    let ll = quick_sort(&mut l.to_vec());
-    let t = rr.into_iter().chain(ll.into_iter()).collect::<Vec<_>>();
-    t
 }
 
-fn quick_sort_rec(a: &mut Vec<i32>) -> usize {
-    // let mut sert = 0;
-    let mut sert = a.len() >> 1;
-    let base = a[sert];
-    let mut l_flag = true;
-    let mut r_flag = true;
+fn quick_sort_rec(nums: &mut [i32], low: usize, high: usize) -> usize {
+    let mut l = low;
+    let mut r = high;
+    loop {
+        while l <= r && nums[l] <= nums[low] {
+            l += 1;
+        }
 
-    while l_flag || r_flag {
-        if sert == a.len() - 1 {
+        while l <= r && nums[r] >= nums[low] {
+            r -= 1;
+        }
+
+        if l > r {
             break;
-        }
-        for i in (sert + 1)..a.len() {
-            // println!("left:{:?}", i);
-            if a[i] < base {
-                // println!("change!");
-                a.swap(i, sert);
-                sert = i;
-                l_flag = true;
-                break;
-            } else {
-                // println!("left continue!");
-                l_flag = false;
-            }
-        }
-        if sert == 0 {
-            break;
-        }
-        for i in 0..sert {
-            // println!("right:{:?}", i);
-            if a[i] > base {
-                // println!("change!");
-                a.swap(i, sert);
-                sert = i;
-                r_flag = true;
-                break;
-            } else {
-                // println!("right continue!");
-                r_flag = false;
-            }
+        } else {
+            nums.swap(l, r);
         }
     }
 
-    sert
+    nums.swap(r, low);
+
+    r
 }
 
 fn maopao(a: &mut Vec<i32>) {
@@ -83,10 +55,6 @@ mod test {
         let v = (0..len)
             .map(|_| rng.gen_range(min..=max))
             .collect::<Vec<_>>();
-        // let mut v = Vec::with_capacity(len);
-        // for _ in 0..len {
-        //     v.push(rng.gen_range(min..max));
-        // }
         v
     }
 
@@ -95,16 +63,17 @@ mod test {
         let len = 3000; let min = -1000; let max = 1000;
         let mut v1 = random_vec(len, max, min);
         let start_time1 = std::time::Instant::now();
-        let _r = quick_sort(&mut v1);
+        let l = v1.len() - 1;
+        quick_sort(&mut v1, 0 , l);
         let duration1 = start_time1.elapsed();
-        println!("快速排序结果:{:?},总耗时:{:?}", _r, duration1);
+        println!("快速排序结果:,总耗时:{:?}", duration1);
 
         let mut v4 = random_vec(len, max, min);
         let start_time4 = std::time::Instant::now();
         let  len = v4.len();
         qs(&mut v4, 0, len - 1);
         let duration4 = start_time4.elapsed();
-        println!("new快速排序递归结果:{:?},总耗时:{:?}", v4, duration4);
+        println!("new快速排序递归结果:,总耗时:{:?}", duration4);
 
         let mut v2 = random_vec(len, max, min);
         let start_time2 = std::time::Instant::now();
