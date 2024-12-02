@@ -6,6 +6,8 @@ mod quick_sort;
 mod insertion_sort;
 mod bin_insertion_sort;
 mod shell_sort;
+mod merge_sort;
+mod selection_sort;
 
 pub use bubble_sort::*;
 pub use quick_sort::*;
