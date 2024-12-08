@@ -8,6 +8,8 @@ mod bin_insertion_sort;
 mod shell_sort;
 mod merge_sort;
 mod selection_sort;
+mod heap_sort;
+mod bucket_sort;
 
 pub use bubble_sort::*;
 pub use quick_sort::*;
