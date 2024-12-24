@@ -10,6 +10,8 @@ mod merge_sort;
 mod selection_sort;
 mod heap_sort;
 mod bucket_sort;
+mod counting_sort;
+mod radix_sort;
 
 pub use bubble_sort::*;
 pub use quick_sort::*;
