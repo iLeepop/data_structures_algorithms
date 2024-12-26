@@ -12,6 +12,7 @@ mod heap_sort;
 mod bucket_sort;
 mod counting_sort;
 mod radix_sort;
+mod tim_sort_without_gallop;
 
 pub use bubble_sort::*;
 pub use quick_sort::*;

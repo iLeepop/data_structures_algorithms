@@ -1,6 +1,6 @@
 // merge_sort
 
-fn merge_sort(nums: &mut [i32]) {
+pub fn merge_sort(nums: &mut [i32]) {
     if nums.len() > 1 {
         let mid = nums.len() >> 1;
         merge_sort(&mut nums[..mid]);
@@ -9,7 +9,7 @@ fn merge_sort(nums: &mut [i32]) {
     }
 }
 
-fn merge(nums: &mut [i32], mid: usize) {
+pub fn merge(nums: &mut [i32], mid: usize) {
     let mut i = 0;
     let mut k = mid;
     let mut temp = Vec::new();
