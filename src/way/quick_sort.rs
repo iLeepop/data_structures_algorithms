@@ -123,4 +123,16 @@ mod test {
         sl1();
         lw3();
     }
+
+    struct test1;
+
+    impl test1 {
+        fn test() {
+            Self::hi();
+        }
+
+        fn hi() {
+            println!("hi");
+        }
+    }
 }
