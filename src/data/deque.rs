@@ -66,8 +66,10 @@ mod tests {
     #[test]
     fn test_deque() {
         let mut d = Deque::new(4);
-        let _r1 = d.add_front(1); let _r2 = d.add_front(2);
-        let _r3 = d.add_rear(3); let _r4 = d.add_rear(4);
+        let _r1 = d.add_front(1);
+        let _r2 = d.add_front(2);
+        let _r3 = d.add_rear(3);
+        let _r4 = d.add_rear(4);
         if let Err(error) = d.add_front(5) {
             print!("add_front error: {error}")
         }

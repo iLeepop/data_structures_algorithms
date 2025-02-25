@@ -22,7 +22,9 @@ pub fn binary_search1(nums: &[i32], num: i32) -> bool {
 }
 
 fn binary_search2(nums: &[i32], num: i32) -> bool {
-    if 0 == nums.len() { return false; }
+    if 0 == nums.len() {
+        return false;
+    }
     let mid = nums.len() >> 1;
     if num == nums[mid] {
         return true;
@@ -39,7 +41,9 @@ mod tests {
 
     #[test]
     fn test_binary_search1() {
-        let nums = [1, 3, 4, 7, 8, 9, 10, 13, 16, 20, 21, 23, 27, 30, 32, 35, 38, 40];
+        let nums = [
+            1, 3, 4, 7, 8, 9, 10, 13, 16, 20, 21, 23, 27, 30, 32, 35, 38, 40,
+        ];
         let num = 26;
         let found = binary_search1(&nums, num);
         let num1 = 38;
@@ -50,7 +54,9 @@ mod tests {
 
     #[test]
     fn test_binary_search2() {
-        let nums = [1, 3, 4, 7, 8, 9, 10, 13, 16, 20, 21, 23, 27, 30, 32, 35, 38, 40];
+        let nums = [
+            1, 3, 4, 7, 8, 9, 10, 13, 16, 20, 21, 23, 27, 30, 32, 35, 38, 40,
+        ];
         let num = 26;
         let found = binary_search2(&nums, num);
         let num1 = 38;

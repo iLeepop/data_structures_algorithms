@@ -11,7 +11,10 @@ pub type Link<T> = Option<Box<Node<T>>>;
 
 impl<T> Node<T> {
     pub fn new(data: T) -> Self {
-        Node {data: data, next: None}
+        Node {
+            data: data,
+            next: None,
+        }
     }
 }
 
@@ -62,7 +65,9 @@ mod tests {
     #[test]
     fn test_list_stack() {
         let mut s = Stack::new();
-        s.push(1); s.push(2); s.push(3);
+        s.push(1);
+        s.push(2);
+        s.push(3);
         println!("top {:?}, size {}", s.peek(), s.size());
         println!("pop {:?}, size {}", s.pop(), s.size());
         println!("is_empty {}, stack: {:?}", s.is_empty(), s);
