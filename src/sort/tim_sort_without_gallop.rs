@@ -321,6 +321,7 @@ impl<'a> Drop for MergeHi<'a> {
                 let src = 0;
                 let dest = self.dest_pos - size;
                 for i in 0..size {
+                    // some wrong here
                     self.list[(dest + i) as usize] = self.temp[(src + i) as usize];
                 }
             }
