@@ -3,6 +3,7 @@ mod utils;
 mod way;
 mod sort;
 mod tree;
+mod graph;
 
 use data::*;
 use utils::*;
