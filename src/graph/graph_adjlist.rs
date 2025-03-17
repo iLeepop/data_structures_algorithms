@@ -6,20 +6,20 @@ use std::collections::HashMap;
 
 
 #[derive(Debug, Clone)]
-struct Vertex<T> {
+pub struct Vertex<T> {
     key: T,
     connects: Vec<(T, i32)>,
 }
 
 impl<T: Clone + PartialEq> Vertex<T> {
-    fn new(key: T) -> Self {
+    pub fn new(key: T) -> Self {
         Self {
             key,
             connects: Vec::new()
         }
     }
 
-    fn adjacent_key(&self, key: &T) -> bool {
+    pub fn adjacent_key(&self, key: &T) -> bool {
         for (nbr, _wt) in self.connects.iter() {
             if nbr == key { return true; }
         }
@@ -31,7 +31,7 @@ impl<T: Clone + PartialEq> Vertex<T> {
         self.connects.push((nbr, wt));
     }
 
-    fn get_connects(&self) -> Vec<&T> {
+    pub fn get_connects(&self) -> Vec<&T> {
         let mut connects = Vec::new();
         for (nbr, _wt) in self.connects.iter() {
             connects.push(nbr);
@@ -40,7 +40,7 @@ impl<T: Clone + PartialEq> Vertex<T> {
         connects
     }
 
-    fn get_nbr_weight(&self, key: &T) -> &i32 {
+    pub fn get_nbr_weight(&self, key: &T) -> &i32 {
         for (nbr, wt) in self.connects.iter() {
             if nbr == key {
                 return wt;
@@ -52,14 +52,14 @@ impl<T: Clone + PartialEq> Vertex<T> {
 }
 
 #[derive(Debug, Clone)]
-struct Graph<T> {
+pub struct Graph<T> {
     vertnums: u32,
     edgenums: u32,
     vertices: HashMap<T, Vertex<T>>,
 }
 
 impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Self {
             vertnums: 0,
             edgenums: 0,
@@ -67,19 +67,19 @@ impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
         }
     }
 
-    fn is_empty(&self) -> bool {
+    pub fn is_empty(&self) -> bool {
         0 == self.vertnums
     }
 
-    fn vertex_num(&self) -> u32 {
+    pub fn vertex_num(&self) -> u32 {
         self.vertnums
     }
 
-    fn edge_num(&self) -> u32 {
+    pub fn edge_num(&self) -> u32 {
         self.edgenums
     }
 
-    fn contains(&self, key: &T) -> bool {
+    pub fn contains(&self, key: &T) -> bool {
         for (nbr, _vertex) in self.vertices.iter() {
             if nbr == key {
                 return true;
@@ -89,13 +89,13 @@ impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
         false
     }
 
-    fn add_vertex(&mut self, key: &T) -> Option<Vertex<T>> {
+    pub fn add_vertex(&mut self, key: &T) -> Option<Vertex<T>> {
         let vertex = Vertex::new(key.clone());
         self.vertnums += 1;
         self.vertices.insert(key.clone(), vertex)
     }
 
-    fn get_vertex(&self, key: &T) -> Option<&Vertex<T>> {
+    pub fn get_vertex(&self, key: &T) -> Option<&Vertex<T>> {
         if let Some(vertex) = self.vertices.get(key) {
             Some(&vertex)
         } else {
@@ -103,7 +103,7 @@ impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
         }
     }
 
-    fn vertex_keys(&self) -> Vec<T> {
+    pub fn vertex_keys(&self) -> Vec<T> {
         let mut keys = Vec::new();
         for key in self.vertices.keys() {
             keys.push(key.clone());
@@ -112,7 +112,7 @@ impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
         keys
     }
 
-    fn remove_vertex(&mut self, key: &T) -> Option<Vertex<T>> {
+    pub fn remove_vertex(&mut self, key: &T) -> Option<Vertex<T>> {
         let old_vertex = self.vertices.remove(key);
         self.vertnums -= 1;
 
@@ -132,7 +132,7 @@ impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
         old_vertex
     }
 
-    fn add_edge(&mut self, from: &T, to: &T, wt: i32) {
+    pub fn add_edge(&mut self, from: &T, to: &T, wt: i32) {
         if !self.contains(from) {
             let _fvert = self.add_vertex(from);
         }
@@ -147,7 +147,7 @@ impl<T: Hash + Eq + PartialEq + Clone> Graph<T> {
                         .add_neighbor(to.clone(), wt);
     }
 
-    fn adjacent(&self, from: &T, to: &T) -> bool {
+    pub fn adjacent(&self, from: &T, to: &T) -> bool {
         self.vertices.get(from).unwrap().adjacent_key(to)
     }
 }
