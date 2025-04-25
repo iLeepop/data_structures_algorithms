@@ -3,6 +3,10 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
+use crate::data::Queue;
+
+
+
 
 #[derive(Clone, Debug, PartialEq)]
 enum Color {
@@ -123,7 +127,64 @@ fn build_word_graph(words: Vec<&str>) -> Graph<String> {
 
 
 // 字梯图 - 广度优先搜索
-fn word_ladder() {
-    
+fn word_ladder(g: &mut Graph<String>, start: Vertex<String>, end: Vertex<String>, len: usize) -> u32 {
+    if !g.vertices.contains_key(&start.key) { return 0; }
+    if !g.vertices.contains_key(&end.key) { return 0; }
+
+    let mut vertex_queue = Queue::new(len);
+    let _r = vertex_queue.enqueue(start);
+
+    while vertex_queue.size() > 0 {
+        let curr = vertex_queue.dequeue().unwrap();
+        for nbr in curr.get_neighbors() {
+            let mut nbv = g.vertices.get(nbr).unwrap().clone();
+            if end.key != nbv.key {
+                if Color::White == nbv.color {
+                    nbv.color = Color::Gray;
+                    nbv.distance = curr.distance + 1;
+
+                    g.vertices.get_mut(nbr)
+                                .unwrap()
+                                .color = Color::Gray;
+                    g.vertices.get_mut(nbr)
+                                .unwrap()
+                                .distance = curr.distance + 1;
+                    
+                    let _r = vertex_queue.enqueue(nbv);
+                }
+            } else {
+                return curr.distance + 1;
+            }
+        }
+    }
+
+    0
+}
+
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_word_ladder() {
+        let words = vec![
+            "FOOL", "COOL", "POOL", "FOUL", "FOIL", "FAIL", "FALL",
+            "POLL", "PALL", "POLE", "PALE", "SALE", "PAGE", "SAGE",
+        ];
+        let len = words.len();
+        let mut g = build_word_graph(words);
+
+        // 首 节 点 加 入 队 列 表 明 正 被 探 索 ， 所 以 颜 色 变 为 灰 色
+        g.vertices.get_mut("FOOL").unwrap().color = Color::Gray;
+
+        // 取出 首 尾点
+        let start = g.vertices.get("FOOL").unwrap().clone();
+        let end = g.vertices.get("SAGE").unwrap().clone();
+        // 计 算 最 小 转 换 次 数 ， 也 就 是 距离
+        let distance = word_ladder(&mut g, start, end, len);
+        println!("the shortest distance: {distance}");
+        // the shortest distance: 6
+    }
 }
 
